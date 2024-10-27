@@ -1,0 +1,48 @@
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding-top: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  mat-card-title {
+    margin-bottom: 20px; 
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;           
+  }
+  
+  mat-card {
+    width: 90%;               
+    max-width: 400px;       
+  }
+  
+  .full-width {
+    width: 100%;             
+  }
+  
+  mat-form-field {
+    width: 100%;             
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;  
+    margin-top: 16px;         
+  }
+  
+  

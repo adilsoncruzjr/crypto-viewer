@@ -1,0 +1,25 @@
+<div class="container">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <div class="spacing"></div> 
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" formControlName="password" required>
+          </mat-form-field>
+  
+          <div class="button-group">
+            <button mat-raised-button color="primary" type="submit">Entrar</button>
+            <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

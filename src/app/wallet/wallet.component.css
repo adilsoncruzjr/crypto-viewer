@@ -1,0 +1,36 @@
+.wallet-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px); /* Altura total da tela, menos espaço para o toolbar */
+    margin: 10px; /* Margem reduzida ao redor da página */
+    padding: 10px; /* Padding interno */
+  }
+  
+  .wallet-card {
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombreamento */
+    background-color: #fff; /* Cor de fundo branca */
+  }
+  
+  .coin-list {
+    flex: 0 0 auto; /* Altura fixa para a lista de moedas */
+    margin: 5px 0; /* Margem reduzida */
+    padding: 10px; /* Padding interno no card */
+  }
+  
+  .coin-buttons {
+    display: flex;
+    overflow-x: auto; /* Permite rolagem horizontal se necessário */
+    gap: 10px; /* Aumentado para mais espaço entre os botões */
+    white-space: nowrap; /* Impede a quebra de linha */
+    padding: 5px 0; /* Reduzido para menos espaço vertical */
+  }
+  
+  .chart-container {
+    flex: 1; /* Ocupa a parte inferior */
+    margin: 5px; /* Margem reduzida em volta do gráfico */
+    padding: 10px; /* Padding interno no card */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreamento leve */
+  }
+  
