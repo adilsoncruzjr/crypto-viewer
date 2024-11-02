@@ -1,22 +1,21 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>Crypto Viewer</span>
-  </mat-toolbar>
-  
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="over" class="sidenav">
-      <h3>Menu</h3>
-      <ul class="menu-list">
-        <li><button mat-button routerLink="/login" (click)="sidenav.toggle()">Login</button></li>
-        <li><button mat-button routerLink="/register" (click)="sidenav.toggle()">Cadastro</button></li>
-        <li><button mat-button (click)="onMenuClick()">Item 3</button></li>
-      </ul>
-    </mat-sidenav>
-    
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
- 
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Crypto Viewer</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <h3>Menu</h3>
+    <ul class="menu-list">
+      <li><button mat-button routerLink="/login" (click)="sidenav.toggle()">Login</button></li>
+      <li><button mat-button routerLink="/register" (click)="sidenav.toggle()">Cadastro</button></li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-search *ngIf="isHomePage()"></app-search>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

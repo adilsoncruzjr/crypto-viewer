@@ -1,0 +1,41 @@
+/* Ajusta o container do conteúdo */
+.content-container {
+    /* Adiciona um espaçamento interno */
+   max-width: 800px; /* Define uma largura máxima para o container */
+   margin-left: auto; /* Empurra o container para a direita */
+   margin-right: 0; /* Remove a margem direita */
+ }
+ 
+ /* Ajusta o cartão do formulário de pesquisa */
+ .card {
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona sombra ao cartão */
+   margin-bottom: 16px; /* Espaçamento abaixo do cartão */
+   border-radius: 8px; /* Arredonda as bordas do cartão */
+ }
+ 
+ /* Ajusta o input de pesquisa */
+ .form-control-borderless {
+   border: none; /* Remove a borda padrão */
+   box-shadow: none; /* Remove a sombra padrão */
+   padding: 10px; /* Adiciona um padding */
+ }
+ 
+ /* Remove o foco do input ao clicar */
+ .form-control-borderless:focus {
+   outline: none; /* Remove o contorno ao focar */
+ }
+ 
+ /* Ajusta o botão de pesquisa */
+ .btn-success {
+   padding: 8px 16px; /* Ajusta o padding do botão */
+   font-size: 14px; /* Tamanho da fonte do botão */
+ }
+ 
+ /* Resultados da pesquisa */
+ .results-container {
+   margin-top: 16px; /* Espaço acima da seção de resultados */
+   border: 1px solid #ccc; /* Borda opcional */
+   padding: 10px; /* Espaçamento interno */
+   border-radius: 4px; /* Arredonda as bordas da seção de resultados */
+ }
+ 

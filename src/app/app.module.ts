@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { GraphicComponent } from './graphic/graphic.component';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { WalletComponent } from './wallet/wallet.component';
+import { SearchComponent } from './search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { WalletComponent } from './wallet/wallet.component';
     RegisterComponent,
     LoginComponent,
     GraphicComponent,
-    WalletComponent
+    WalletComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,10 @@ import { WalletComponent } from './wallet/wallet.component';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
+    MatInputModule,
+    FormsModule,
     ],
   providers: [
     provideAnimationsAsync(),

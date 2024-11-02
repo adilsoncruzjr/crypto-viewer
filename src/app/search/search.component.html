@@ -1,0 +1,29 @@
+<div class="content-container">
+  <div class="search-container">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 mx-auto">
+        <form class="card card-sm">
+          <div class="card-body row no-gutters align-items-right">
+            <div class="col-auto">
+              <i class="fas fa-search h4 text-body"></i>
+            </div>
+            <div class="col">
+              <input #searchInput class="form-control form-control-lg form-control-borderless" type="search"
+                placeholder="Pesquisar moeda">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-lg btn-success" type="submit">Pesquisar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="searchResults.length > 0" class="results-container">
+    <h3>Resultados da Pesquisa:</h3>
+    <ul>
+      <li *ngFor="let result of searchResults">{{ result }}</li>
+    </ul>
+  </div>
+</div>
