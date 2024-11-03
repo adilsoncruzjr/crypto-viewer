@@ -1,0 +1,13 @@
+.chart-container {
+    
+    position: relative; /* Necessário para o canvas responsivo */
+   
+}
+
+#myBarChart {
+    position: absolute; /* Permite que o canvas ocupe o container */
+    top: 0px;
+    left: 0;
+    width: 100% !important; /* Forçar o canvas a ocupar 100% da largura do container */
+    height: 10% !important; /* Forçar o canvas a ocupar 100% da altura do container */
+}
