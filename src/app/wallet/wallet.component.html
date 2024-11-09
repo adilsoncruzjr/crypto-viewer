@@ -1,20 +1,42 @@
+<!-- wallet.component.html -->
 <div class="wallet-container">
-    <mat-card class="wallet-card">
-      <mat-card-title>Wallet</mat-card-title>
-      <div class="coin-list">
-        <div class="coin-buttons">
-          <button mat-raised-button color="primary">Bitcoin</button>
-          <button mat-raised-button color="primary">Ethereum</button>
-          <button mat-raised-button color="primary">Litecoin</button>
-          <!-- Adicione moedas -->
-        </div>
-      </div>
-      <div class="chart-container">
-        <mat-card>
-          <mat-card-title>Gráfico de Moedas</mat-card-title>
-          <canvas id="myChart"></canvas> <!-- gráfico aqui -->
-        </mat-card>
-      </div>
-    </mat-card>
-  </div>
-  
+  <mat-card class="wallet-card">
+    <mat-card-title>Wallet</mat-card-title>
+    
+    <!-- Botão de Logout no canto superior direito -->
+    <button mat-icon-button color="warn" (click)="logout()" class="logout-button">
+      <mat-icon>exit_to_app</mat-icon> <!-- Ícone de logout -->
+    </button>
+    
+    <!-- Nome do usuário -->
+    <div class="user-info">
+      <p>Usuário: <span class="user-name">{{ userName }}</span></p> 
+      
+      <!-- Componente de busca embutido -->
+      <app-search (coinSelected)="onCoinSelected($event)"></app-search>
+    </div>
+    
+    <!-- Lista de moedas -->
+    <div class="coin-list">
+      <h3>Moedas do Usuário:</h3>
+      <table mat-table>
+        <thead>
+          <tr>
+            <th>Nome da Moeda</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of userCoins; let i = index">
+            <td>{{ coin.name }}</td>
+            <td>
+              <button mat-button color="primary" (click)="viewCoin(coin)">Visualizar</button>
+              <button mat-button color="warn" (click)="deleteCoin(i)">Apagar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card>
+</div>

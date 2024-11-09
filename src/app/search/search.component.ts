@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CryptoService } from '../crypto.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,6 +13,8 @@ export class SearchComponent {
   searchResults: any[] = [];
   private searchTerms = new Subject<string>();
   selectedCoin: string = '';
+
+  @Output() coinSelected = new EventEmitter<string>();
 
   constructor(private cryptoService: CryptoService) {
     console.log('SearchComponent initialized');
@@ -117,6 +119,7 @@ export class SearchComponent {
     this.selectedCoin = coin.name; // Armazenar a moeda selecionada
     this.searchResults = []; // Limpa as sugestões
     console.log('Selected coin:', coin);
+    this.coinSelected.emit(coin.name); // Emite o evento com o nome da moeda
   }
 
 }

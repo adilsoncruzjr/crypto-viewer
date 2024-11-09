@@ -15,7 +15,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
+    <div>
     <app-search *ngIf="isHomePage()"></app-search>
+  </div>
     <router-outlet></router-outlet> <!-- Mantenha o router-outlet aqui -->
     <div [ngClass]="{'div': isHomePage()}">
       <app-graphic *ngIf="isHomePage()"></app-graphic>
