@@ -76,9 +76,10 @@ getAllCoins(): Observable<any[]> {
   return this.http.get<any[]>(`${this.apiUrl}/coins/all`);
 }
 
-getBitcoinMarketData(): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}/bitcoin-market-data`);
+getCoinMarketData(coinId: string): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/coin-market-data/${coinId}`);
 }
+
 
 registerUser(name: string, email: string, password: string, passwordConfirmation: string): Observable<any> {
   const userData = {
@@ -91,11 +92,12 @@ registerUser(name: string, email: string, password: string, passwordConfirmation
   return this.http.post<any>(`${this.apiUrl}/register`, userData);
 }
 
-addCoins(userId: number, coinName: string): Observable<any> {
+addCoins(userId: number, coinId: string, coinName: string): Observable<any> {
   const amount = 1; // Adiciona 1 moeda por padrão
   return this.http.post(`${this.apiUrl}/wallet/${userId}/add-coins`, {
-    coin_name: coinName,
-    amount: amount,
+    coin_id: coinId,  // Envia o id da moeda
+    coin_name: coinName,  // Envia o nome da moeda
+    amount: amount,  // Quantidade de moedas a serem adicionadas (1 no caso)
   });
 }
 
@@ -109,5 +111,6 @@ deleteCoin(userId: number, coinName: string): Observable<any> {
     body: { coin_name: coinName } // Passando o nome da moeda no corpo da requisição
   });
 }
+
 
 }

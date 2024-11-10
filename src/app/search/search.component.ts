@@ -13,8 +13,9 @@ export class SearchComponent {
   searchResults: any[] = [];
   private searchTerms = new Subject<string>();
   selectedCoin: string = '';
+  selectedCoinId: string = ''; // Variável para armazenar o id da moeda
 
-  @Output() coinSelected = new EventEmitter<string>();
+  @Output() coinSelected = new EventEmitter<any>();
 
   constructor(private cryptoService: CryptoService) {
     console.log('SearchComponent initialized');
@@ -116,10 +117,19 @@ export class SearchComponent {
   selectCoin(coin: any) {
     // Preencher o campo de pesquisa com o nome da moeda
     this.searchQuery = coin.name; // ou use coin.symbol, conforme necessário
-    this.selectedCoin = coin.name; // Armazenar a moeda selecionada
+    this.selectedCoin = coin.name; // Armazenar o nome da moeda selecionada
+    this.selectedCoinId = coin.id; // Armazenar o id da moeda selecionada
     this.searchResults = []; // Limpa as sugestões
-    console.log('Selected coin:', coin);
-    this.coinSelected.emit(coin.name); // Emite o evento com o nome da moeda
+
+    // Adicionando log para verificar se os valores foram armazenados
+    console.log('Selected Coin Name:', this.selectedCoin);
+    console.log('Selected Coin ID:', this.selectedCoinId);
+    
+    // Emite o evento com o nome e o id da moeda
+    this.coinSelected.emit({
+      name: coin.name,
+      id: coin.id
+    });
   }
 
 }
