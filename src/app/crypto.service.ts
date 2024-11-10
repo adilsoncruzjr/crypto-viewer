@@ -104,4 +104,10 @@ getCoins(userId: number): Observable<any[]> {
   return this.http.get<any[]>(`${this.apiUrl}/wallet/${userId}/coins`);
 }
 
+deleteCoin(userId: number, coinName: string): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/wallet/${userId}/coin`, {
+    body: { coin_name: coinName } // Passando o nome da moeda no corpo da requisição
+  });
+}
+
 }

@@ -95,12 +95,28 @@ export class WalletComponent {
     }
   }
 
-  // Método para deletar uma moeda
-  deleteCoin(index: number) {
-    console.log('Removendo moeda do índice:', index);  // Log do índice da moeda a ser removida
-    this.userCoins.splice(index, 1);
-    console.log('Lista de moedas após remoção:', this.userCoins);  // Log da lista de moedas após remoção
+   // Método para deletar uma moeda
+deleteCoin(index: number) {
+  const user = this.cryptoService.getUser(); // Obtém os dados do usuário
+  const userId = user?.id; // Obtém o ID do usuário
+
+  if (userId) {
+    const coinName = this.userCoins[index].name;
+
+    // Chama o serviço para deletar a moeda
+    this.cryptoService.deleteCoin(userId, coinName).subscribe(response => {
+      console.log('Resposta do servidor:', response);
+
+      // Remover a moeda localmente da lista de moedas
+      this.userCoins.splice(index, 1);
+      console.log('Moedas após remoção:', this.userCoins);
+    }, error => {
+      console.error('Erro ao remover moeda:', error);
+    });
+  } else {
+    console.error('ID do usuário não encontrado. A moeda não pode ser removida.');
   }
+}
 
   // Método para visualizar os detalhes de uma moeda
   viewCoin(coin: any) {
