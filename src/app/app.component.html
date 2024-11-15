@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar *ngIf="showToolbar" class="custom-toolbar">
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -15,12 +15,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div>
-    <app-search *ngIf="isHomePage()"></app-search>
-  </div>
     <router-outlet></router-outlet> <!-- Mantenha o router-outlet aqui -->
-    <div [ngClass]="{'div': isHomePage()}">
-      <app-graphic *ngIf="isHomePage()"></app-graphic>
-    </div>
+    
   </mat-sidenav-content>
 </mat-sidenav-container>

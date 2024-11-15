@@ -1,36 +1,35 @@
 <div class="content-container">
   <div class="search-container">
-    <div class="row">
-      <div class="col-12 col-md-10 col-lg-8 mx-auto">
-        <form (submit)="onEnterKey(); $event.preventDefault();" class="card card-sm">
-          <div class="card-body row no-gutters align-items-right">
-            <div class="col-auto">
-              <i class="fas fa-search h4 text-body"></i>
-            </div>
-            <div class="col">
-              <input 
-                #searchInput
-                name="search" 
-                class="form-control form-control-lg form-control-borderless" 
-                type="search"
-                placeholder="Pesquisar moeda"
-                [(ngModel)]="searchQuery"
-                (input)="onInputChange(searchInput.value)"
-                (keydown.enter)="onEnterKey()"
-              />
-              <!-- Exibir sugestões diretamente abaixo do campo de entrada -->
-              <ul *ngIf="searchResults.length > 0" class="list-group mt-2">
-                <li *ngFor="let coin of searchResults" class="list-group-item" (click)="selectCoin(coin)">
-                  {{ coin.name }} ({{ coin.symbol }})
-                </li>
-              </ul>
-            </div>
-            <div class="col-auto">
-              <button class="btn btn-lg btn-success" type="button" (click)="onEnterKey()">Pesquisar</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <form (submit)="onEnterKey(); $event.preventDefault();" class="card card-sm">
+      <div class="card-body d-flex align-items-center">
+        <!-- Ícone de Pesquisa -->
+        <mat-icon class="search-icon"></mat-icon>
+        
+        <!-- Campo de Pesquisa -->
+        <mat-form-field class="search-field" appearance="fill">
+          <input 
+            #searchInput
+            matInput
+            name="search"
+            type="search"
+            placeholder="Pesquisar moeda"
+            [(ngModel)]="searchQuery"
+            (input)="onInputChange(searchInput.value)"
+            (keydown.enter)="onEnterKey()"
+          />
+        </mat-form-field>
 
+        <!-- Botão de Pesquisa -->
+        <button mat-raised-button color="primary" type="button" (click)="onEnterKey()">Pesquisar</button>
+      </div>
+
+      <!-- Sugestões -->
+      <mat-list *ngIf="searchResults.length > 0" class="search-results">
+        <mat-list-item *ngFor="let coin of searchResults" (click)="selectCoin(coin)">
+          {{ coin.name }} ({{ coin.symbol }})
+          <span class="add-text">ADICIONAR</span>
+        </mat-list-item>
+      </mat-list>
+    </form>
+  </div>
+</div>

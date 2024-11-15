@@ -10,56 +10,76 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  errorMessage: string | null = null;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private cryptoService: CryptoService,
-    private router: Router // Injetando o Router
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required], // 'name' no backend espera o nome completo
-      email: ['', [Validators.required, Validators.email]], // Email deve ser válido
-      password: ['', [Validators.required, Validators.minLength(6)]], // Senha com mínimo de 6 caracteres
-      passwordConfirmation: ['', Validators.required] // Confirmação de senha
-    });
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password_confirmation: ['', [Validators.required]]
+    }, { validator: this.passwordsMatch });
+  }
+
+  passwordsMatch(group: FormGroup): { [key: string]: boolean } | null {
+    const password = group.get('password');
+    const confirmPassword = group.get('password_confirmation');
+
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return { passwordsDontMatch: true };
+    }
+    return null;
+  }
+
+  checkEmailExists(email: string): void {
+    this.cryptoService.checkEmail(email).subscribe(
+      response => {
+      },
+      error => {
+        if (error.status === 409) {
+          this.errorMessage = 'Este e-mail já está em uso.';
+        } else {
+          this.errorMessage = 'Ocorreu um erro ao verificar o e-mail.';
+        }
+      }
+    );
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
 
-      // Verificar se as senhas coincidem
-      if (formData.password !== formData.passwordConfirmation) {
-        alert('As senhas não coincidem!');
-        return;
-      }
+      this.checkEmailExists(formData.email);
 
-      // Chama o método registerUser do CryptoService para enviar os dados ao backend
-      this.cryptoService.registerUser(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.passwordConfirmation
-      ).subscribe(
-        response => {
-          console.log('Usuário registrado com sucesso', response);
-          alert('Registro realizado com sucesso!');
-          
-          // Redireciona para o componente de Wallet após o registro
-          this.router.navigate(['/wallet']); // Navega para a página '/wallet'
-        },
-        error => {
-          console.error('Erro no registro', error);
-          alert('Ocorreu um erro ao registrar o usuário.');
-        }
-      );
+      if (!this.errorMessage) {
+        this.cryptoService.registerUser(
+          formData.name,
+          formData.email,
+          formData.password,
+          formData.password_confirmation
+        ).subscribe(
+          response => {
+            console.log('Usuário registrado com sucesso', response);
+            this.router.navigate(['/login']);
+          },
+          error => {
+            console.error('Erro no registro', error);
+            alert('Ocorreu um erro ao registrar o usuário.');
+          }
+        );
+      }
     } else {
       alert('Por favor, preencha todos os campos obrigatórios.');
     }
   }
 
   onCancel() {
-    this.registerForm.reset(); // Limpa o formulário ao cancelar
+    this.registerForm.reset();
+    this.router.navigate(['/']);
   }
 
 }

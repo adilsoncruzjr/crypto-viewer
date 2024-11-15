@@ -1,13 +1,51 @@
-.chart-container {
-    
-    position: relative; /* Necessário para o canvas responsivo */
-   
-}
+/* Estilo para o texto explicativo */
+.time-selection-text {
+    font-size: 16px;
+    margin-right: 15px;  /* Espaço entre o texto e os botões */
+    color: #333;
+  }
+  
+  /* Estilo para o contêiner dos botões */
+  .time-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;  /* Espaçamento entre o texto e os botões */
+    padding-bottom: 50px;
+  }
+  
+  /* Estilo para o botão ativo */
+  button.mat-raised-button.active {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  /* Garantir que os botões se ajustem bem no layout */
+  button.mat-raised-button {
+    white-space: nowrap; /* Impede que o texto dos botões quebre em várias linhas */
+  }
 
-#myBarChart {
-    position: absolute; /* Permite que o canvas ocupe o container */
-    top: 0px;
-    left: 0;
-    width: 100% !important; /* Forçar o canvas a ocupar 100% da largura do container */
-    height: 10% !important; /* Forçar o canvas a ocupar 100% da altura do container */
-}
+  /* Estilo para o título do gráfico */
+.graphic-title {
+    font-size: 24px;  /* Aumenta o tamanho da fonte */
+    color: #000000;  /* A cor branca para contrastar com o fundo */
+    text-shadow: 2px 2px 4px rgba(153, 153, 153, 0.3);  /* Sombra sutil para dar destaque */
+    flex: 1;  /* Expande o título para ocupar o máximo de espaço */
+    display: flex;
+    justify-content: center;  /* Centraliza o título horizontalmente */
+    align-items: center;  /* Alinha o título verticalmente no centro */
+  }
+  
+  /* Alinhamento da toolbar (garante que o título ocupe o espaço corretamente) */
+  mat-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Estilo para o botão de voltar */
+mat-toolbar .mat-icon-button {
+    margin-right: 15px;  /* Espaçamento para o lado do botão */
+  }
+  

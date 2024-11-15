@@ -7,6 +7,12 @@ body {
   /* Evita barras de rolagem */
 }
 
+.custom-toolbar {
+  background-color: #94ccec; /* cor personalizada */
+  color: white;
+}
+
+
 .sidenav-container {
   height: 100vh;
 }

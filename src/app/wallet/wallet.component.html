@@ -1,24 +1,27 @@
 <!-- wallet.component.html -->
 <div class="wallet-container">
   <mat-card class="wallet-card">
-    <mat-card-title>Wallet</mat-card-title>
-    
+    <mat-card-title>{{ userName | uppercase }}</mat-card-title>
+
     <!-- Botão de Logout no canto superior direito -->
     <button mat-icon-button color="warn" (click)="logout()" class="logout-button">
       <mat-icon>exit_to_app</mat-icon> <!-- Ícone de logout -->
+      Sair
     </button>
     
-    <!-- Nome do usuário -->
-    <div class="user-info">
-      <p>Usuário: <span class="user-name">{{ userName }}</span></p> 
-      
-      <!-- Componente de busca embutido -->
+    <div class="search-container">
+      <!-- Texto explicativo acima do componente de busca -->
+      <p class="search-instruction">Pesquise e adicione suas moedas</p>
+    
+      <!-- Componente de busca -->
       <app-search (coinSelected)="onCoinSelected($event)"></app-search>
     </div>
     
+
+
     <!-- Lista de moedas -->
     <div class="coin-list">
-      <h3>Moedas do Usuário:</h3>
+      <h3>Moedas</h3>
       <table mat-table>
         <thead>
           <tr>
@@ -30,6 +33,8 @@
         <tbody>
           <tr *ngFor="let coin of userCoins; let i = index">
             <td>{{ coin.name }}</td>
+            <td>{{ coin.value | currency:'USD':'symbol':'1.2-2' }}</td>
+            <!-- Exibe o valor da moeda com 2 casas decimais -->
             <td>
               <button mat-button color="primary" (click)="viewCoin(coin)">Visualizar</button>
               <button mat-button color="warn" (click)="deleteCoin(i)">Apagar</button>

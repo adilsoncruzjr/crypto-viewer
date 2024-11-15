@@ -2,30 +2,57 @@
   <mat-card>
     <mat-card-title>Cadastro</mat-card-title>
     <div class="spacing"></div> <!-- Espaçamento entre o título e o conteúdo -->
+
     <mat-card-content>
+      <!-- Exibição de Mensagem de Erro do Backend -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="name" required>
+          <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+            O nome é obrigatório.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" required>
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+            O email é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+            O email não é válido.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Senha</mat-label>
           <input matInput formControlName="password" type="password" required>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+            A senha é obrigatória.
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
+            A senha deve ter pelo menos 6 caracteres.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Confirmar Senha</mat-label>
-          <input matInput formControlName="passwordConfirmation" type="password" required>
+          <input matInput formControlName="password_confirmation" type="password" required>
+          <mat-error *ngIf="registerForm.get('password_confirmation')?.hasError('required')">
+            A confirmação da senha é obrigatória.
+          </mat-error>
+          <mat-error *ngIf="registerForm?.hasError('passwordsDontMatch')">
+            As senhas não coincidem.
+          </mat-error>
         </mat-form-field>
 
         <div class="button-group">
-          <button mat-raised-button color="primary" type="submit">Salvar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Cadastrar</button>
           <button mat-button type="button" (click)="onCancel()">Cancelar</button>
         </div>
       </form>

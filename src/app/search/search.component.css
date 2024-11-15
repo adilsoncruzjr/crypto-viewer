@@ -1,41 +1,86 @@
-/* Ajusta o container do conteúdo */
+/* Estilos Globais */
 .content-container {
-    /* Adiciona um espaçamento interno */
-   max-width: 800px; /* Define uma largura máxima para o container */
-   margin-left: auto; /* Empurra o container para a direita */
-   margin-right: 0; /* Remove a margem direita */
- }
- 
- /* Ajusta o cartão do formulário de pesquisa */
- .card {
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona sombra ao cartão */
-   margin-bottom: 16px; /* Espaçamento abaixo do cartão */
-   border-radius: 8px; /* Arredonda as bordas do cartão */
- }
- 
- /* Ajusta o input de pesquisa */
- .form-control-borderless {
-   border: none; /* Remove a borda padrão */
-   box-shadow: none; /* Remove a sombra padrão */
-   padding: 10px; /* Adiciona um padding */
- }
- 
- /* Remove o foco do input ao clicar */
- .form-control-borderless:focus {
-   outline: none; /* Remove o contorno ao focar */
- }
- 
- /* Ajusta o botão de pesquisa */
- .btn-success {
-   padding: 8px 16px; /* Ajusta o padding do botão */
-   font-size: 14px; /* Tamanho da fonte do botão */
- }
- 
- /* Resultados da pesquisa */
- .results-container {
-   margin-top: 16px; /* Espaço acima da seção de resultados */
-   border: 1px solid #ccc; /* Borda opcional */
-   padding: 10px; /* Espaçamento interno */
-   border-radius: 4px; /* Arredonda as bordas da seção de resultados */
- }
- 
+  padding: 20px; /* Ajustado o padding para dar mais espaço */
+  background-color: #f7f7f7;
+}
+
+/* Card do Formulário */
+.search-container {
+  background-color: white;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Alinhar o campo de pesquisa e o botão lado a lado */
+.card-body {
+  display: flex;
+  align-items: center;  /* Alinha verticalmente */
+  justify-content: flex-start;  /* Garante que os itens fiquem alinhados à esquerda */
+}
+
+/* Estilo do Campo de Pesquisa */
+.search-field {
+  width: 100%;
+  margin-right: 10px;
+}
+
+/* Estilo do Botão */
+button.mat-raised-button {
+  padding: 10px 20px;
+  text-transform: none;
+  margin-left: 10px;
+}
+
+/* Estilo para as Sugestões */
+.search-results {
+  margin-top: 10px;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.mat-list-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.mat-list-item:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .card-body {
+    flex-direction: row; /* Garante que o layout continue em linha em telas menores */
+    flex-wrap: wrap;  /* Permite que os itens se ajustem caso o espaço seja limitado */
+    justify-content: flex-start;
+  }
+
+  .search-field {
+    margin-bottom: 10px;
+    width: 100%; /* Garante que o campo de pesquisa ocupe a largura completa */
+  }
+
+  button.mat-raised-button {
+    width: 100%; /* Faz com que o botão ocupe toda a largura disponível, se necessário */
+  }
+}
+
+/* Estilo para o texto "Clique para adicionar" */
+.add-text {
+  font-size: 12px;
+  color: #007bff;
+  margin-left: 10px;
+  cursor: pointer;
+  font-style: italic;
+}
+
+/* Estilo para o item de lista ao passar o mouse */
+.mat-list-item:hover .add-text {
+  text-decoration: underline;  /* Adiciona um sublinhado ao passar o mouse */
+}

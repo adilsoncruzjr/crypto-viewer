@@ -24,13 +24,38 @@ export class WalletComponent {
   ) {}
 
   ngOnInit(): void {
-    const user = this.cryptoService.getUser();  // Obtém os dados do usuário
-    const userId = user?.id;
+    const user = this.cryptoService.getUser();  // Obtém os dados do usuário do serviço
+    if (user) {
+      this.userName = user.name;  // Atribui o nome do usuário à variável userName
+      const userId = user.id;
 
-    if (userId) {
-      console.log('Buscando moedas do backend para o usuário com ID:', userId);
-      this.loadCoins(userId);  // Carregar as moedas do backend
+      if (userId) {
+        console.log('Buscando moedas do backend para o usuário com ID:', userId);
+        this.loadCoins(userId);  // Carrega as moedas do usuário a partir do backend
+      }
     }
+  }
+
+  getCoinValue(coinId: string): void {
+    this.cryptoService.getCoinMarketData(coinId, 0).subscribe(
+      (data) => {
+        if (data && data.prices && data.prices.length > 0) {
+          const coinValue = data.prices[0][1];  // Obtém o valor da moeda
+          console.log(`Valor da moeda ${coinId}: ${coinValue}`);
+          
+          // Encontra a moeda na lista de moedas e atualiza o valor
+          const coin = this.userCoins.find(c => c.id === coinId);
+          if (coin) {
+            coin.value = coinValue;  // Atualiza o valor da moeda
+          }
+        } else {
+          console.error('Dados de preço não encontrados para a moeda:', coinId);
+        }
+      },
+      (error) => {
+        console.error('Erro ao obter dados do mercado para a moeda', coinId, error);
+      }
+    );
   }
 
   // Método para carregar as moedas do usuário
@@ -38,15 +63,21 @@ export class WalletComponent {
     this.cryptoService.getCoins(userId).subscribe(
       (coins) => {
         console.log('Resposta das moedas recebidas:', coins);
-  
+    
         if (Array.isArray(coins)) {
           // Atualiza a lista de moedas, agora incluindo o id e o nome
           this.userCoins = coins.map((coin: any) => ({
             name: coin.name,   // Nome da moeda
             id: coin.id,       // ID da moeda
+            value: 0           // Inicializa o valor com 0
           }));
   
           console.log('Lista de moedas atualizada:', this.userCoins);
+  
+          // Agora vamos buscar os valores das moedas
+          this.userCoins.forEach(coin => {
+            this.getCoinValue(coin.id);  // Chama o método para obter o valor de cada moeda
+          });
         } else {
           console.error('A resposta não é um array válido:', coins);
         }

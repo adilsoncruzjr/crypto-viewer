@@ -46,6 +46,7 @@ export class LoginComponent {
   }
 
   onCancel() {
-    this.loginForm.reset();
+    this.loginForm.reset();  // Reseta o formulário
+    this.router.navigate(['/']);  // Redireciona para a página inicial
   }
 }

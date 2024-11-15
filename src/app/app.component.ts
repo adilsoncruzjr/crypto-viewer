@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router'
 
@@ -8,7 +8,15 @@ import { Router } from '@angular/router'
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  showToolbar: boolean = true;
   @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  ngOnInit() {
+    // Verifica o caminho da URL
+    this.router.events.subscribe(() => {
+      this.showToolbar = this.router.url === '/';  // A barra de ferramentas será mostrada apenas na página inicial
+    });
+  }
 
   onMenuClick() {
     console.log('Menu item clicked!');

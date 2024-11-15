@@ -1,5 +1,62 @@
-<canvas id="myBarChart"></canvas>
+<mat-card class="graphic-container">
+  <!-- Título -->
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-raised-button color="warn" (click)="goBack()" class="back-button">
+      Voltar
+    </button>
+    <span class="graphic-title">Gráfico {{ coinId }}</span> <!-- Aqui exibimos o coinId -->
+  </mat-toolbar>
 
-<div>
-  <canvas id="myLineChart"></canvas>
-</div>
+  <!-- Linha com o texto e os botões -->
+  <div class="time-selector">
+    <!-- Texto explicativo -->
+    <span class="time-selection-text">Selecione o tempo para o gráfico</span>
+
+    <!-- Botões de seleção de período -->
+    <button
+      mat-raised-button
+      color="primary"
+      [class.active]="selectedDays === 1"
+      (click)="changeTimeRange(1)"
+    >
+      Hoje
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [class.active]="selectedDays === 7"
+      (click)="changeTimeRange(7)"
+    >
+      Semana
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [class.active]="selectedDays === 30"
+      (click)="changeTimeRange(30)"
+    >
+      Mês
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [class.active]="selectedDays === 180"
+      (click)="changeTimeRange(180)"
+    >
+      6 Meses
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [class.active]="selectedDays === 360"
+      (click)="changeTimeRange(360)"
+    >
+      Ano
+    </button>
+  </div>
+
+  <!-- Canvas do Gráfico -->
+  <div class="chart-container">
+    <canvas id="myLineChart"></canvas>
+  </div>
+</mat-card>
